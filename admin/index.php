@@ -52,6 +52,41 @@
 							$controller->logout();
 							break;
 						}
+						case 'profile':
+						{
+							$controller->profile();
+							break;
+						}
+						case 'show':
+						{
+							$controller->show();
+							break;
+						}
+						case 'update':
+						{
+							$controller->update();
+							break;
+						}
+						case 'create':
+						{
+							$controller->create();
+							break;
+						}
+						case 'edit':
+						{
+							$controller->edit();
+							break;
+						}
+						case 'delete':
+						{
+							$controller->delete();
+							break;
+						}
+						case 'upload':
+						{
+							$controller->upload();
+							break;
+						}
 						default:
 						{
 							$controller->index();
@@ -60,7 +95,90 @@
 					}
 					break;
 				}
-				
+				case 'post':
+				{
+					include_once('controller/PostController.php');
+					$controller = new PostController();
+					switch ($act) {
+						case 'show':
+						{
+							$controller->show();
+							break;
+						}
+						case 'update':
+						{
+							$controller->update();
+							break;
+						}
+						case 'create':
+						{
+							$controller->create();
+							break;
+						}
+						case 'edit':
+						{
+							$controller->edit();
+							break;
+						}
+						case 'delete':
+						{
+							$controller->delete();
+							break;
+						}
+						case 'upload':
+						{
+							$controller->upload();
+							break;
+						}
+						default:
+						{
+							$controller->index();
+							break;
+						}
+					}
+				}
+				case 'tag':
+				{
+					/*include_once('controller/TagController.php');
+					$controller = new TagController();
+					switch ($act) {
+						case 'show':
+						{
+							$controller->show();
+							break;
+						}
+						case 'update':
+						{
+							$controller->update();
+							break;
+						}
+						case 'create':
+						{
+							$controller->create();
+							break;
+						}
+						case 'edit':
+						{
+							$controller->edit();
+							break;
+						}
+						case 'delete':
+						{
+							$controller->delete();
+							break;
+						}
+						case 'upload':
+						{
+							$controller->upload();
+							break;
+						}
+						default:
+						{
+							$controller->index();
+							break;
+						}
+					}*/
+				}
 				default:
 				{
 					include_once('controller/HomeController.php');

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -25,7 +25,10 @@
 
     <!-- Custom Fonts -->
     <link href="View/css/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
+    <link rel="stylesheet" type="text/css" href="view/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="view/css/toastr.min.css">
+    <link rel="stylesheet" type="text/css" href="view/css/sweetalert.css">
+    
     <script src="View/js/jquery.min.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
@@ -36,11 +39,16 @@
 
     <!-- Morris Charts JavaScript -->
     <script src="View/js/raphael.min.js"></script>
-    <script src="viw/js/morris.min.js"></script>
+    <script src="view/js/morris.min.js"></script>
     <script src="View/js/morris-data.js"></script>
 
     <!-- Custom Theme JavaScript -->
     <script src="view/js/sb-admin-2.js"></script>
+    <script type="text/javascript" src="view/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="view/js/dataTables.buttons.min.js"></script>
+    
+    <script type="text/javascript" src="view/js/toastr.min.js"></script>
+    <script type="text/javascript" src="view/js/sweetalert.min.js"></script>
 
 </head>
 
@@ -254,15 +262,15 @@
                 <!-- /.dropdown -->
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                        <i class="fa fa-user fa-fw"></i><?php echo $_SESSION['admin']['name']; ?> <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                        <li><a href="?mode=user&act=profile&key=<?php echo $_SESSION['admin']['key_md5']; ?>"><i class="fa fa-user fa-fw"></i> User Profile</a>
                         </li>
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                         </li>
                         <li class="divider"></li>
-                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a href="?mode=user&act=logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -286,49 +294,43 @@
                             <!-- /input-group -->
                         </li>
                         <li>
-                            <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                            <a href="?mode=home&act=index"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Charts<span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Thống kê<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="flot.html">Flot Charts</a>
+                                    <a href="flot.html">Thống kê lượt truy cập</a>
                                 </li>
                                 <li>
-                                    <a href="morris.html">Morris.js Charts</a>
+                                    <a href="morris.html">Thống kê hoạt động người dùng</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
-                        <li>
-                            <a href="tables.html"><i class="fa fa-table fa-fw"></i> Tables</a>
+                        <!--<li>
+                            <a href="tables.html"><i class="fa fa-table fa-fw"></i> Quản trị chung</a>
                         </li>
                         <li>
-                            <a href="forms.html"><i class="fa fa-edit fa-fw"></i> Forms</a>
-                        </li>
+                            <a href="forms.html"><i class="fa fa-edit fa-fw"></i> Quản trị Bài viết</a>
+                        </li>-->
                         <li>
-                            <a href="#"><i class="fa fa-wrench fa-fw"></i> UI Elements<span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-wrench fa-fw"></i> Quản trị chung<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="panels-wells.html">Panels and Wells</a>
+                                    <a href="?mode=user&act=index">Quản trị người dùng</a>
                                 </li>
                                 <li>
-                                    <a href="buttons.html">Buttons</a>
+                                    <a href="?mode=post&act=index">Quản trị bài viết</a>
                                 </li>
                                 <li>
-                                    <a href="notifications.html">Notifications</a>
-                                </li>
-                                <li>
-                                    <a href="typography.html">Typography</a>
-                                </li>
-                                <li>
-                                    <a href="icons.html"> Icons</a>
-                                </li>
-                                <li>
-                                    <a href="grid.html">Grid</a>
+                                    <a href="?mode=tag&act=index">Quản trị thẻ</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
+                        </li>
+                        <!--<li>
+                            <a href="forms.html"><i class="fa fa-edit fa-fw"></i> Quản trị thẻ</a>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-sitemap fa-fw"></i> Multi-Level Dropdown<span class="fa arrow"></span></a>
@@ -355,10 +357,8 @@
                                             <a href="#">Third Level Item</a>
                                         </li>
                                     </ul>
-                                    <!-- /.nav-third-level -->
                                 </li>
                             </ul>
-                            <!-- /.nav-second-level -->
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-files-o fa-fw"></i> Sample Pages<span class="fa arrow"></span></a>
@@ -370,8 +370,7 @@
                                     <a href="login.html">Login Page</a>
                                 </li>
                             </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
+                        </li>-->
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->

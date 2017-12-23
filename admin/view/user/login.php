@@ -6,6 +6,13 @@
 	<link rel="stylesheet" type="text/css" href="view/css/bootstrap.min.css">
 </head>
 <body>
+	<?php 
+		if(!isset($_SESSION['isLogin'])){
+			unset($_SESSION['isLogin']);
+			echo '<script language="javascript">alert("Tên đăng nhập hoặc mật khẩu sai");</script>';
+
+		}
+	?>
 	<div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1">
 		<form action="?mode=user&act=loginSuccess" method="POST" class="form-horizontal" role="form">
 			<div class="form-group">
