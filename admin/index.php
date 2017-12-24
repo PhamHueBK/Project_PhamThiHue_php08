@@ -100,19 +100,24 @@
 					include_once('controller/PostController.php');
 					$controller = new PostController();
 					switch ($act) {
+						case 'create':
+						{
+							$controller->create();
+							break;
+						}
 						case 'show':
 						{
 							$controller->show();
 							break;
 						}
+						case 'showCT':
+						{
+							$controller->showCT();
+							break;
+						}
 						case 'update':
 						{
 							$controller->update();
-							break;
-						}
-						case 'create':
-						{
-							$controller->create();
 							break;
 						}
 						case 'edit':
@@ -125,17 +130,13 @@
 							$controller->delete();
 							break;
 						}
-						case 'upload':
-						{
-							$controller->upload();
-							break;
-						}
 						default:
 						{
 							$controller->index();
 							break;
 						}
 					}
+					break;
 				}
 				case 'tag':
 				{

@@ -59,6 +59,11 @@
 		</table>
 
 	</div>
+    <script type="text/javascript">
+        $(document).ready(function() {
+        $('#table').DataTable();
+    } );
+    </script>
 	<!-- Modal -->
 	<div class="modal fade" id="addUser" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
   		<div class="modal-dialog" role="document">

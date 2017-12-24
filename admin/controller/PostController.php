@@ -1,166 +1,68 @@
 <?php 
 	include_once('Model/Post.php');
 	include_once('controller/Controller.php');
+	include_once('Model/User.php');
 
 	class PostController extends Controller{
 		public $postModel;
+		public $user;
 
 		public function __construct(){
 			$this->postModel = new Post();
+			$this->userModel = new User();
 		}
 
 		public function index(){
-			$typpe = 8;
-			$condition = "join users on posts.user_id = users.user_id";
-			if(!isset($_GET['type'])){
-				$data = $this->postModel->getAll($condition);
-				if(count($data) > 0){
-					switch ($data['type']) {
+			$condition = "join users on users.user_id = posts.user_id";
+			$data = $this->postModel->getAll($condition);
+			
+			if(count($data) > 0){
+				foreach ($data as $key => $value) {
+					switch ($value['type']) {
 						case '0':
 						{
-							$data['type'] = 'Truyện ngắn';
+							$data[$key]['type'] = "Truyện ngắn";
 							break;
 						}
 						case '1':
 						{
-							$data['type'] = "Truyện blog";
+							$data[$key]['type'] = "Truyện blog";
 							break;
 						}
 						case '2':
 						{
-							$data['type'] = "Tâm sự";
+							$data[$key]['type'] = "Tâm sự";
 							break;
+
 						}
 						case '3':
 						{
-							$data['type'] = "Tiểu thuyết";
+							$data[$key]['type'] = "Tiểu thuyết";
 							break;
 						}
 						case '4':
 						{
-							$data['type'] = "Yêu";
+							$data[$key]['type'] = "Yêu";
 							break;
 						}
 						case '5':
 						{
-							$data['type'] = "Sống";
+							$data[$key]['type'] = "Sống";
 							break;
 						}
 						case '6':
 						{
-							$data['type'] = "Bạn bè";
+							$data[$key]['type'] = "Bạn bè";
 							break;
 						}
 						case '7':
 						{
-							$data['type'] = "Gia đình";
-							break;
+							$data[$key]['type'] = "Gia đình";
 						}
 					}
 				}
-				
-				require_once('view/post/index.php');
 			}
-			else{
-				$type = $_GET['type'];
-				if($type == 1|| $type == 0){
-					$condition .= " where type = ".$permission;
-					$data = $this->postModel->getAll($condition);
-					if(count($data) > 0){
-						switch ($data['type']) {
-							case '0':
-							{
-								$data['type'] = 'Truyện ngắn';
-								break;
-							}
-							case '1':
-							{
-								$data['type'] = "Truyện blog";
-								break;
-							}
-							case '2':
-							{
-								$data['type'] = "Tâm sự";
-								break;
-							}
-							case '3':
-							{
-								$data['type'] = "Tiểu thuyết";
-								break;
-							}
-							case '4':
-							{
-								$data['type'] = "Yêu";
-								break;
-							}
-							case '5':
-							{
-								$data['type'] = "Sống";
-								break;
-							}
-							case '6':
-							{
-								$data['type'] = "Bạn bè";
-								break;
-							}
-							case '7':
-							{
-								$data['type'] = "Gia đình";
-								break;
-							}
-						}
-					}
-				}
-				else
-					$data = $this->postModel->getAll($condition);
-					if(count($data) > 0){
-						switch ($data['type']) {
-							case '0':
-							{
-								$data['type'] = 'Truyện ngắn';
-								break;
-							}
-							case '1':
-							{
-								$data['type'] = "Truyện blog";
-								break;
-							}
-							case '2':
-							{
-								$data['type'] = "Tâm sự";
-								break;
-							}
-							case '3':
-							{
-								$data['type'] = "Tiểu thuyết";
-								break;
-							}
-							case '4':
-							{
-								$data['type'] = "Yêu";
-								break;
-							}
-							case '5':
-							{
-								$data['type'] = "Sống";
-								break;
-							}
-							case '6':
-							{
-								$data['type'] = "Bạn bè";
-								break;
-							}
-							case '7':
-							{
-								$data['type'] = "Gia đình";
-								break;
-							}
-						}
-					}
-					$jSonData = json_encode($data, false);
-	     			echo $jSonData;
-			}
-			
+			require_once('view/post/index.php');
 		}
 
 		public function show(){
@@ -168,14 +70,25 @@
 			require_once('view/post/show.php');
 		}
 
+		public function showCT(){
+			$key = $_GET['key'];
+			//echo "HELLO";
+			$data = $this->postModel->findMd5($key);
+			
+
+			$jSonData = json_encode($data, false);
+     		echo $jSonData;
+		}
+
 		public function update(){
 			$data = $_POST;
 			$primary_key_value = $data['post_id'];
 			$data['key_md5'] = "'".md5($primary_key_value)."'";
 			$data['title'] = "N'".$data['title']."'";
-			$data['desciption'] = "N'".$data['description']."'";
+			$data['description'] = "N'".$data['description']."'";
 			$data['content'] = "'".$data['content']."'";
-			$data['created_at'] = "'".$data['created_at']."'";
+			
+			$data['status'] = 1;
 			if($data['thumbnail'] != "")
 				$data['thumbnail'] = "'".$data['thumbnail']."'";
 			else
@@ -183,6 +96,9 @@
 
 			unset($data['post_id']);
 			$data = $this->postModel->update($data, $primary_key_value);
+
+			$user = $this->userModel->find($data['user_id']);
+			$data['name'] = $user['name'];
 			$jSonData = json_encode($data, false);
      		echo $jSonData;
 		}
@@ -193,17 +109,18 @@
 			$datas['title'] = "N'".$datas['title']."'";
 			$datas['description'] = "'".$datas['description']."'";
 			$datas['content'] = "N'".$datas['content']."'";
-			if($datas['created_at'] != "")
-				$datas['created_at'] = "'".$datas['created_at']."'";
-			else
-				$datas['created_at'] = "'0000-00-00'";
+			$datas['created_at'] = date('Y-m-d');
+			$datas['created_at'] = "'".$datas['created_at']."'";
+			$datas['user_id'] = $_SESSION['admin']['user_id'];
+			
 			$datas['views'] = 0;
 			if($datas['thumbnail'] != "")
 				$datas['thumbnail'] = "'".$datas['thumbnail']."'";
 			else
 				unset($datas['thumbnail']);
-			
+			 
 			$post = $this->postModel->insert($datas);
+			$post['name'] = $_SESSION['admin']['name'];
 			$jSonData = json_encode($post, false);
      		echo $jSonData;
 		}

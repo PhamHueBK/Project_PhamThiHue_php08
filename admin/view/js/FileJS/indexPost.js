@@ -10,7 +10,7 @@ $(function(){
 		var tmp_name = $('#file').val();
 		var thumbnail = tmp_name.substring(tmp_name.lastIndexOf("\\")+1, tmp_name.length);
 
-		
+		console.log("HELLO");
 		//End xử lý ảnh
 		$.ajax({
 			type: "post",
@@ -37,6 +37,22 @@ $(function(){
 	      			if(response.length > 0){
 	      				var result = JSON.parse(response);
 		                var data = result;
+		                if(data.type == 0)
+		                	data.type = "Truyện ngắn";
+		                else if(data.type == 1)
+		                	data.type = "Truyện blog";
+		                else if(data.type == 2)
+		                	data.type = "Tâm sự";
+		                else if(data.type == 3)
+		                	data.type = "Tiểu thuyết";
+		                else if(data.type == 4)
+		                	data.type = "Yêu";
+		                else if(data.type == 5)
+		                	data.type = "Sống";
+		                else if(data.type == 6)
+		                	data.type = "Bạn bè";
+		                else
+		                	data.type = "Gia đình";
 		                $('#addPost').modal('hide');
 		                var html =  '<tr>'+
 									'<td>'+data.title+'</td>'+
@@ -45,6 +61,7 @@ $(function(){
 									'<td>'+data.type+'</td>'+
 									'<td>'+data.name+'</td>'+
 									'<td>'+data.created_at+'</td>'+
+									'<td>'+data.views+'</td>'+
 									'<td>'+
 										'<a href="?mode=post&act=show&key='+data.key_md5+'" class = "btn btn-primary" style="width: 100%; margin: 1%">Xem chi tiết</a>'+
 										'<a href="javascript:;" onclick="editPost('+data.post_id+')" class = "btn btn-success" style="width: 100%; margin: 1%"><i class="fa fa-trash-o"></i> Sửa thông tin</a>'+
@@ -103,12 +120,30 @@ $(function(){
 	      			if(response.length > 0){
 	      				var result = JSON.parse(response);
 		                var data = result;
+		                if(data.type == 0)
+		                	data.type = "Truyện ngắn";
+		                else if(data.type == 1)
+		                	data.type = "Truyện blog";
+		                else if(data.type == 2)
+		                	data.type = "Tâm sự";
+		                else if(data.type == 3)
+		                	data.type = "Tiểu thuyết";
+		                else if(data.type == 4)
+		                	data.type = "Yêu";
+		                else if(data.type == 5)
+		                	data.type = "Sống";
+		                else if(data.type == 6)
+		                	data.type = "Bạn bè";
+		                else
+		                	data.type = "Gia đình"; 
+		                
 		                var html =  '<td>'+data.title+'</td>'+
 									'<td>'+data.description+'</td>'+
 									'<td><img src ="view/images/'+data.thumbnail+'" width="100px" height="100px"/></td>'+
 									'<td>'+data.type+'</td>'+
 									'<td>'+data.name+'</td>'+
 									'<td>'+data.created_at+'</td>'+
+									'<td>'+data.views+'</td>'+
 									'<td>'+
 										'<a href="?mode=post&act=show&key='+data.key_md5+'" class = "btn btn-primary" style="width: 100%; margin: 1%">Xem chi tiết</a>'+
 										'<a href="javascript:;" onclick="editPost('+data.post_id+')" class = "btn btn-success" style="width: 100%; margin: 1%"><i class="fa fa-trash-o"></i> Sửa thông tin</a>'+
@@ -162,7 +197,7 @@ function editPost(key) {
 	      			$('#editDescription').val(data.description);
 	      			$('#editType').val(data.type);
 	      			var html = '<img src = "view/images/'+data.thumbnail+'" width="200px" height="200px"/>';
-	                console.log("HTLLo");
+	                console.log(html);
 	               	$('#editAvatar').html(html);
 	      			
               	}
@@ -222,7 +257,7 @@ function alertDel(id){
 function selectType(){
 	var type = $('#type').val();
 	console.log(type);
-	if(type <= 7){
+	/*if(type <= 7){
 		$.ajax({
 			type: "get",
 			url: '?mode=post&act=index&type='+type,
@@ -324,7 +359,7 @@ function selectType(){
 	  		}	
 		
 		});
-	}
+	}*/
 }
 
 function avatar(){
@@ -399,7 +434,6 @@ function avatar2(){
     	});
     } else{
         $('.status').text('Chỉ được upload file ảnh');
-        //
     }
 }
 

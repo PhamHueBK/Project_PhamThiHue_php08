@@ -52,12 +52,13 @@
 					<td><?php echo $value['title']; ?></td>
 					<td><?php echo $value['description']; ?></td>
 					<td><img src = "view/images/<?php echo $value['thumbnail']; ?>" width="100px" height="100px"/></td>
+					<td><?php echo $value['type']; ?></td>
 					<td><?php echo $value['name']; ?></td>
 					<td><?php echo $value['created_at']; ?></td>
 					<td><?php echo $value['views']; ?></td>
 					<td>
-						<a href="?mode=post&act=show&key=<?php echo $value['key_md5']; ?>" class = "btn btn-primary" style="width: 100%; margin: 1%">Xem chi tiết</a>
-						<a href="javascript:;" type="button" onclick="editUser(<?= ($value['post_id'])?>)" class = "btn btn-success" style="width: 100%; margin: 1%"><i class="fa fa-trash-o"></i> Sửa thông tin</a>
+						<a href="?mode=post&act=show&key=<?php echo md5($value['post_id']); ?>" class = "btn btn-primary" style="width: 100%; margin: 1%">Xem chi tiết</a>
+						<a href="javascript:;" type="button" onclick="editPost(<?= ($value['post_id'])?>)" class = "btn btn-success" style="width: 100%; margin: 1%"><i class="fa fa-trash-o"></i> Sửa thông tin</a>
 						<a href="javascript:;" onclick="alertDel(<?php echo $value['post_id']; ?>)" class="btn btn-danger" style="width: 100%; margin: 1%"><i class="fa fa-trash-o"></i> Xóa</a>
 					</td>
 				</tr>
@@ -66,6 +67,11 @@
 		</table>
 
 	</div>
+	<script type="text/javascript">
+	    $(document).ready(function() {
+	    $('#table').DataTable();
+	} );
+	</script>
 	<!-- Modal -->
 	<div class="modal fade" id="addPost" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
   		<div class="modal-dialog" role="document">
@@ -186,7 +192,7 @@
     					<div class="form-group">
     						<label>Ảnh đại diện <span style="color: red">*</span></label>
     						<div id="editAvatar"></div>
-    						<input type="file" onchange="avatar2()" class="form-control" id="editFile" name="file" required="true">
+    						<input type="file" onchange="avatar2()" class="form-control" id="editFile" name="editFile" required="true">
     					</div>
         			</form>
       			</div>
