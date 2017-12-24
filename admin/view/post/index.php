@@ -1,7 +1,14 @@
 <?php 
 	include_once('view/layouts/Header.php');
 ?>
+	<script type="text/javascript" src='view/js/ckeditor.js'></script>
 	<script type="text/javascript" src="view/js/FileJS/indexPost.js"></script>
+	<script type="text/javascript">
+        $(function () {
+            CKEDITOR.replace('content');
+            CKEDITOR.replace('editContent');
+        })
+    </script>
 	<div>
 		<table class="table table-hover" id="table">
 			<thead>
@@ -109,7 +116,8 @@
     					</div>
     					<div class="form-group">
     						<label>Nội dung <span style="color: red">*</span></label>
-    						<input type="text" class="form-control" id="content" required="true">
+    						<textarea style="border:1px" class="form-control" id="content" name="content" required="true" cols="60" rows="10" onchange="layGiaTri()"></textarea>
+    						<!--<input type="text" class="form-control" id="content" required="true">-->
     					</div>
     					<div class="form-group">
     						<label>Từ khóa <span style="color: red">*</span></label>
@@ -177,7 +185,8 @@
     					</div>
     					<div class="form-group">
     						<label>Nội dung <span style="color: red">*</span></label>
-    						<input type="text" class="form-control" id="editContent" required="true">
+    						<!--<input type="text" class="form-control" id="editContent" required="true">-->
+    						<textarea style="border:1px" class="form-control" id="editContent" name="editContent" required="true" cols="60" rows="10"></textarea>
     					</div>
     					<div class="form-group">
     						<label>Từ khóa <span style="color: red">*</span></label>

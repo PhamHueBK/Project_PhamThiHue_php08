@@ -22,7 +22,7 @@ $(function(){
 	                $('#Mainpost_id').val(data.post_id);
 	                $('#Mainkey_md5').val(data.key_md5);
 	                $('#Maintitle').val(data.title);
-	                $('#Maincontent').val(data.content);
+	                $('#Maincontent').html(data.content);
 	                $('#Maintype').val(data.type);
 	                $('#Maindescription').val(data.description);
 	                console.log(data.avatar);
@@ -33,7 +33,7 @@ $(function(){
 	                $('#post_id').val($('#Mainpost_id').val());
 				    $('#key_md5').val($('#Mainkey_md5').val());
 				    $('#title').val($('#Maintitle').val());
-				    $('#content').val($('#Maincontent').val());
+				    $('#content').val(data.content);
 				    $('#description').val($('#Maindescription').val());
 				    
 				    $('#type').val($('#Maintype').val());
@@ -51,7 +51,8 @@ $(function(){
 		var key_md5 = $('#key_md5').val();
 		var post_id = $('#post_id').val();
 		var title = $('#title').val();
-		var content = $('#content').val();
+		//var content = $('#content').val();
+		var content = CKEDITOR.instances.content.getData();
 		var description = $('#description').val();
 		var type = $('#type').val();
 		var tmp_name = $('#file').val();
@@ -85,7 +86,7 @@ $(function(){
 		                $('#Mainpost_id').val(data.post_id);
 		                $('#Mainkey_md5').val(data.key_md5);
 		                $('#Maintitle').val(data.title);
-		                $('#Maincontent').val(data.content);
+		                $('#Maincontent').html(data.content);
 		                $('#Maintype').val(data.type);
 		                $('#Maindescription').val(data.description);
 		                console.log(data.description);

@@ -4,7 +4,8 @@ $(function(){
 		var title = $('#title').val();
 		var type = $('#typeNew').val();
 		var tag = $('#tag').val();
-		var content = $('#content').val();
+		//var content = $('#content').val();
+		var content = CKEDITOR.instances.content.getData();
 		var description = $('#description').val();
 		//Xử lý ảnh
 		var tmp_name = $('#file').val();
@@ -90,7 +91,8 @@ $(function(){
 	$('#updateBtn').click(function(){
 		var post_id = $('#editPost_id').val();
 		var title = $('#editTitle').val();
-		var content = $('#editContent').val();
+		//var content = $('#editContent').val();
+		var content = CKEDITOR.instances.editContent.getData();
 		var type = $('#editType').val();
 		var description = $('#editDescription').val();
 		var tmp_name = $('#editFile').val();
@@ -194,6 +196,8 @@ function editPost(key) {
 	      			$('#editPost_id').val(data.post_id);
 	      			$('#editTitle').val(data.title);
 	      			$('#editContent').val(data.content);
+	      			console.log(data.content);
+	      			console.log($('#editContent').val());
 	      			$('#editDescription').val(data.description);
 	      			$('#editType').val(data.type);
 	      			var html = '<img src = "view/images/'+data.thumbnail+'" width="200px" height="200px"/>';
@@ -435,5 +439,10 @@ function avatar2(){
     } else{
         $('.status').text('Chỉ được upload file ảnh');
     }
+}
+
+function layGiaTri(){
+	var content = CKEDITOR.instances.content.getData();
+	console.log(content);
 }
 
