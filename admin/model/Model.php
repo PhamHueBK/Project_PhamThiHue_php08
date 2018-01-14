@@ -27,6 +27,8 @@
 
 		public function getAll($condition){
 			$sql = "select * from ".$this->table." ".$condition;
+			/*echo $sql;
+			die;*/
 			mysqli_set_charset($this->conn, 'UTF8');
 			$result = $this->conn->query($sql);
 			$data = array();

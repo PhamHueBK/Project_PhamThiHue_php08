@@ -324,6 +324,13 @@
                                     <a href="?mode=post&act=index">Quản trị bài viết</a>
                                 </li>
                                 <li>
+                                    <a href="?mode=post&act=image">Quản trị bài đăng ảnh</a>
+                                </li>
+
+                                <li>
+                                    <a href="?mode=post&act=index2">Phê duyệt bài viết</a>
+                                </li>
+                                <li>
                                     <a href="?mode=tag&act=index">Quản trị thẻ</a>
                                 </li>
                             </ul>

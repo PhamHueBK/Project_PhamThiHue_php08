@@ -77,6 +77,7 @@
 			}
 
 			$jSonData = json_encode($data, false);
+			
      		echo $jSonData;
      		//require_once('view/user/show.php');
 		}

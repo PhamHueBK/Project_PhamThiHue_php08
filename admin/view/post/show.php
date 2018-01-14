@@ -11,7 +11,7 @@
 	<div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1">
 		<form action="" method="POST" class="form-horizontal" role="form">
 			<div class="form-group">
-				<legend>Thông tin người dùng</legend>
+				<legend>Chi tiết bài đăng</legend>
 			</div>
 			<div class="form-group">
 				<input type="hidden" class="form-control" id="Mainkey_md5" value="<?php echo $key; ?>">

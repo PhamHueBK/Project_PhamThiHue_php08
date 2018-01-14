@@ -4,6 +4,7 @@ $(function(){
 		var title = $('#title').val();
 		var type = $('#typeNew').val();
 		var tag = $('#tag').val();
+		console.log(tag);
 		//var content = $('#content').val();
 		var content = CKEDITOR.instances.content.getData();
 		var description = $('#description').val();

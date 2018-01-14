@@ -130,6 +130,21 @@
 							$controller->delete();
 							break;
 						}
+						case 'image':
+						{
+							$controller->image();
+							break;
+						}
+						case 'index2':
+						{
+							$controller->index2();
+							break;
+						}
+						case 'update_delete':
+						{
+							$controller->update_delete();
+							break;
+						}
 						default:
 						{
 							$controller->index();

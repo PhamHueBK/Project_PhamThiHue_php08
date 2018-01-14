@@ -12,26 +12,7 @@
 	<div>
 		<table class="table table-hover" id="table">
 			<thead>
-				<tr>
-					<th colspan="7"></th>
-					<th style="text-align: right;">
-						<div class="form-group">
-							<div>
-								<select onchange="selectType()" name="type" id="type" class="form-control" required="required">
-									<option value="8">Tất cả</option>
-									<option value="0">Truyện ngắn</option>
-									<option value="1">Truyện blog</option>
-									<option value="2">Tâm sự</option>
-									<option value="3">Tiểu thuyết</option>
-									<option value="4">Yêu</option>
-									<option value="5">Sống</option>
-									<option value="6">Bạn bè</option>
-									<option value="7">Gia đình</option>
-								</select>
-							</div>
-						</div>
-					</th>
-				</tr>
+				
 				<tr>
 					<th colspan="8">
 						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addPost">
@@ -121,7 +102,8 @@
     					</div>
     					<div class="form-group">
     						<label>Từ khóa <span style="color: red">*</span></label>
-    						<input type="text" class="form-control" id="tag" required="true">
+    						<input type="text" class="form-control" value="" data-role="tagsinput" required="true" /> 
+    						<!--<input type="text" class="form-control" id="tag" required="true">-->
     					</div>
 
     					<div class="form-group">

@@ -7,10 +7,9 @@
 </head>
 <body>
 	<?php 
-		if(!isset($_SESSION['isLogin'])){
+		if(isset($_SESSION['isLogin'])){
 			unset($_SESSION['isLogin']);
-			echo '<script language="javascript">alert("Tên đăng nhập hoặc mật khẩu sai");</script>';
-
+			echo '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button><strong>Email hoặc Mật khẩu không đúng</strong></div>';
 		}
 	?>
 	<div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1">
